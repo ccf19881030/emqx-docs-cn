@@ -503,6 +503,114 @@ $ curl -i --basic -u admin:public -X DELETE "http://localhost:8081/api/v4/client
 {"code":0}
 ```
 
+#### POST /api/v4/clients/{clientid}/ratelimit {#endpoint-set-ratelimit}
+
+设置客户端的速率限制策略。
+
+**Path Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| clientid  | String | True | ClientID |
+
+**Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| conn_bytes_in | String | False| 设置该客户端流入的字节速率。<br/> 例如："10MB,1s" |
+| conn_messages_in | String | False| 设置该客户端流入的 PUBLISH 报文速率。<br/> 例如："10,1s" |
+
+**Success Response Body (JSON):**
+
+| Name | Type | Description |
+| ---- | --------- | ----------- |
+| code | Integer   | 0         |
+
+**Examples:**
+
+```bash
+$ curl -i --basic -u admin:public -X POST "http://localhost:8081/api/v4/clients/example/ratelimit" -d '{"conn_bytes_in": "10MB,1s", "conn_messages_in": "10,1s"}'
+
+{"code":0}
+```
+
+#### DELETE /api/v4/clients/{clientid}/ratelimit {#endpoint-delete-ratelimit}
+
+清除指定客户端的速率限制策略。
+
+**Path Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| clientid  | String | True | ClientID |
+
+**Success Response Body (JSON):**
+
+| Name | Type | Description |
+| ---- | --------- | ----------- |
+| code | Integer   | 0         |
+
+**Examples:**
+
+```bash
+$ curl -i --basic -u admin:public -X DELETE "http://localhost:8081/api/v4/clients/example/ratelimit"
+
+{"code":0}
+```
+#### POST /api/v4/clients/{clientid}/quota {#endpoint-set-quota}
+
+设置客户端消息转发的配额策略。
+
+**Path Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| clientid  | String | True | ClientID |
+
+**Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| conn_messages_routing | String | False| 设置该客户端转发消息的配额。<br/> 例如："10,1s" |
+
+**Success Response Body (JSON):**
+
+| Name | Type | Description |
+| ---- | --------- | ----------- |
+| code | Integer   | 0         |
+
+**Examples:**
+
+```bash
+$ curl -i --basic -u admin:public -X POST "http://localhost:8081/api/v4/clients/example/quota" -d '{"conn_messages_routing": "10,1s"}'
+
+{"code":0}
+```
+
+#### DELETE /api/v4/clients/{clientid}/ratelimit {#endpoint-delete-ratelimit}
+
+清除指定客户端消息转发的配额策略。
+
+**Path Parameters:**
+
+| Name   | Type | Required | Description |
+| ------ | --------- | -------- |  ---- |
+| clientid  | String | True | ClientID |
+
+**Success Response Body (JSON):**
+
+| Name | Type | Description |
+| ---- | --------- | ----------- |
+| code | Integer   | 0         |
+
+**Examples:**
+
+```bash
+$ curl -i --basic -u admin:public -X DELETE "http://localhost:8081/api/v4/clients/example/quota"
+
+{"code":0}
+```
+
 ### 订阅信息 {#endpoint-subscriptions}
 
 #### GET /api/v4/subscriptions {#endpoint-get-subscriptions}
